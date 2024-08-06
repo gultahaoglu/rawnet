@@ -1,15 +1,14 @@
-optimizer: Adam 
+optimizer: Adam
 lr: 0.0001
 wd: 0.0001
 epoch: 100
 batch_size: 32
 seed: 1234
 lr_decay: keras
-amsgrad: 1   #for adam optim
+amsgrad: 1   # for adam optim
 mg: 1
 
-
-#model-related
+# model-related
 model:
   margin: 2
   nb_samp: 64000
@@ -21,8 +20,3 @@ model:
   gru_node: 1024
   nb_gru_layer: 3
   nb_classes: 2
-  
-  
-
-
-
