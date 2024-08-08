@@ -133,9 +133,7 @@ if __name__ == '__main__':
     parser.add_argument('--eval_part', type=int, default=0)
     parser.add_argument('--loss', type=str, default='weighted_CCE')
     dir_yaml = os.path.splitext('model_config_RawNet2')[0] + '.yaml'
-    with open(dir_yaml, 'r') as f_yaml:
-            parser1 = yaml.load(f_yaml, Loader=yaml.FullLoader)    
-    np.random.seed(parser1['seed'])
+    
     torch.backends.cudnn.deterministic = True
     torch.backends.cudnn.benchmark = False
     if not os.path.exists('models'):
@@ -165,17 +163,7 @@ if __name__ == '__main__':
     dev_loader = DataLoader(dev_set, batch_size=args.batch_size, shuffle=True)
     #torch.backends.cudnn.enabled = False
     # Model Initialization
-    if bool(parser1['mg']):
-            # model_1gpu = RawNet(parser1['model'], device)
-            # nb_params = sum([param.view(-1).size()[0] for param in model_1gpu.parameters()])
-            # model =(model_1gpu).to(device)
-            
-            model=RawNet3.RawNet3(Bottle2neck, model_scale=8, context=True, summed=True, norm_sinc ="mean",nOut=2,encoder_type="ASP",log_sinc=True,out_bn=True,sinc_stride=3).to(device)
-            
-            
-    else:
-        # model = RawNet(parser1['model'], device).to(device)
-        model=RawNet3.RawNet3(Bottle2neck, model_scale=8, context=True, summed=True, norm_sinc ="mean",nOut=2,encoder_type="ASP",log_sinc=True,out_bn=True,sinc_stride=3).to(device)
+ -  model=RawNet3.RawNet3(Bottle2neck, model_scale=8, context=True, summed=True, norm_sinc ="mean",nOut=2,encoder_type="ASP",log_sinc=True,out_bn=True,sinc_stride=3).to(device)
        
         nb_params = sum([param.view(-1).size()[0] for param in model.parameters()])
     # Adam optimizer
